@@ -1,13 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Add new Emp</title>
+<title>Update Employee Details</title>
 </head>
 <body>
-<form action="/FirstJSPproject/AddEmployee" method="post">
+<form action="/FirstJSPproject/updateemployee.jsp" method="Post"><!-- need to mention method =post -->
 		<center>
 		<div>
 		    ID: <input type='text' name='id' placeholder="Employee Id">
@@ -25,14 +23,13 @@
 			Hire date: <input type='text' name='hdate' placeholder="DD/MM/YYYY">
 			</div>
 			<div>
-			Job id: <input type='text' name='jobid' placeholder="job_Id">
+			Job id: <input type='text' name='jobid' placeholder="Job_Id">
 			</div>
 			<div>
-			Salary: <input type='text' name='salary' placeholder="0.000"><br>
+			Salary: <input type='text' name='salary' placeholder="00.000"><br>
 			</div>
-			<input type=submit name='submit' value='Add'>
-			
+			<input type=submit name='submit' value='update'>
 		</center>
-	</form>
+		</form>
 </body>
 </html>

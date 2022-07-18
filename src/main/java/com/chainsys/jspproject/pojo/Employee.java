@@ -1,4 +1,4 @@
-package com.chainsys.jspproject;
+package com.chainsys.jspproject.pojo;
 /**
  *  @author arav3116 chainsys
  *  sub - miniproject

@@ -1,4 +1,4 @@
-package com.chainsys.jspproject;
+package com.chainsys.jspproject.commonutil;
 
 import java.io.BufferedWriter;
 import java.io.File;

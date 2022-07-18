@@ -1,9 +1,6 @@
-package com.chainsys.jspproject;
+package com.chainsys.jspproject.dao;
 /**
  *  @author arav3116 chainsys
- *  sub - miniproject
- *  created on : 17-05-2022
- * 
  */
 
 
@@ -19,7 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import com.chainsys.jspproject.pojo.Employee;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

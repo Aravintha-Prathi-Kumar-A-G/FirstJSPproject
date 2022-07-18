@@ -7,43 +7,41 @@
  <%@ page import= "java.text.ParseException"%>
  <%@ page import= "java.util.Date" %>
  <%@ page import= "java.text.SimpleDateFormat" %>
-  <%@ page import= "com.chainsys.jspproject.commonutil.Validator"%>
+ <%@ page import= "com.chainsys.jspproject.commonutil.Validator"%>
  <%@ page import= "com.chainsys.jspproject.commonutil.ExceptionManager"%>
  <%@ page import="com.chainsys.jspproject.commonutil.InvalidInputDataException"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>update employee</title>
+<title>Add new Employee</title>
 </head>
 <body>
 <%
-String source="UpdateEmployee";
+String source="AddNewEmployee";
 String message="<h1>Error while "+source+"</h1>";
-Employee emp = new Employee(); 
-//Employee emp =(Employee)request.getAttribute("updateemp");
+Employee emp = new Employee();
+//Employee emp =(Employee)request.getAttribute("addemp");
 try {
 
-	String emp_id = request.getParameter("id");
+	String id = request.getParameter("id");
 	try {
-		Validator.checkStringForParseInt(emp_id);
+		Validator.checkStringForParseInt(id);
 	} catch (InvalidInputDataException e) {
 		message +=" Error in Employee id input </p>";
 		String errorPage=ExceptionManager.handleException(e, source, message);
 		%><h1><%=errorPage%></h1><%
-		return;
-
+       return; // It terminates the Code execution beyond this point 
 	}
-	int id = Integer.parseInt(emp_id);
+	int id1 = Integer.parseInt(id);
 	try {
-		Validator.CheckNumberForGreaterThanZero(id);
+		Validator.CheckNumberForGreaterThanZero(id1);
 	} catch (InvalidInputDataException e) {
 		message +=" Error in Employee id input </p>";
-		String errorPage=ExceptionManager.handleException(e, source, message);
-		%><h1><%=errorPage%></h1><%
-		return;
+		String errorPage=ExceptionManager.handleException(e, source, message);					out.print(errorPage);
+       return;
 	}
-	emp.setEmp_id(id);
+	emp.setEmp_id(id1);
 
 	String emp_Firstname = request.getParameter("fname");
 	try {
@@ -52,17 +50,17 @@ try {
 		message +=" Error in First Name input </p>";
 		String errorPage=ExceptionManager.handleException(e, source, message);
 		%><h1><%=errorPage%></h1><%
-		return;
+       return;
 	}
 	emp.setFirst_name(emp_Firstname);
 	String emp_LastName = request.getParameter("Lname");
 	try {
 		Validator.checkStringOnly(emp_LastName);
 	} catch (InvalidInputDataException e) {
-		message +=" Error in Lat Name input </p>";
+		message +=" Error in Last Name input </p>";
 		String errorPage=ExceptionManager.handleException(e, source, message);
 		%><h1><%=errorPage%></h1><%
-		return;
+       return;
 	}
 	emp.setLast_name(emp_LastName);
 	String emp_email = request.getParameter("email");
@@ -72,7 +70,7 @@ try {
 		message +=" Error in email input </p>";
 		String errorPage=ExceptionManager.handleException(e, source, message);
 		%><h1><%=errorPage%></h1><%
-		return;
+       return;
 	}
 	emp.setEmail(emp_email);
 	SimpleDateFormat hire_dateFormate = new SimpleDateFormat("dd/MM/yyyy");
@@ -86,7 +84,7 @@ try {
 		message +=" Error in Hire Date input </p>";
 		String errorPage=ExceptionManager.handleException(e, source, message);
 		%><h1><%=errorPage%></h1><%
-		return;
+       return;
 	}
 	try {
 		emp.setHire_date(hire_dateFormate.parse(emp_HireDate));
@@ -94,7 +92,7 @@ try {
 		message +=" Error in Hire Date input </p>";
 		String errorPage=ExceptionManager.handleException(e, source, message);
 		%><h1><%=errorPage%></h1><%
-		return;
+       return;
 	}
 	String emp_Job_id = request.getParameter("jobid");
 	try {
@@ -103,38 +101,36 @@ try {
 		message +=" Error in Job Id input </p>";
 		String errorPage=ExceptionManager.handleException(e, source, message);
 		%><h1><%=errorPage%></h1><%
-		return;
-		
+       return;
 	}
 	emp.setJob_id(emp_Job_id);
-	String emp_salary = request.getParameter("salary");
+	String emp_salary = null;
 	try {
+		emp_salary = request.getParameter("salary");
 		Validator.checkFloat(emp_salary);
 	} catch (InvalidInputDataException e) {
-		message +=" Error in salary input </p>";
+		message +=" Error in Salary input </p>";
 		String errorPage=ExceptionManager.handleException(e, source, message);
 		%><h1><%=errorPage%></h1><%
-		return;
-		
+       return;
 	}
 	float salary = Float.parseFloat(emp_salary);
 	emp.setSalary(salary);
-	int result = EmployeeDao.updateEmployee(emp);
-	out.println(result + "row Updated");
+	int result = EmployeeDao.insertEmployee(emp);
+	out.println(result + "row inserted");
 } catch (Exception e) {
 	message +=" Error while inserting record </p>";
 	String errorPage=ExceptionManager.handleException(e, source, message);
 	%><h1><%=errorPage%></h1><%
-			return;
-}
+   return;
+   }
 try {
-	
 } catch (Exception e) {
-	message +=" Error in Hire Date input </p>";
+	message +="Message: "+e.getMessage();
 	String errorPage=ExceptionManager.handleException(e, source, message);
 	%><h1><%=errorPage%></h1><%
+   return;
 }
-	
-	%>
+%>
 </body>
 </html>
